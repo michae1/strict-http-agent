@@ -1,0 +1,14 @@
+{
+    "name": "strict-agent",
+    "version": "1.0.0",
+    "description": "HTTP Agent with strict queue requests limit",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+        },
+    "author": {
+        "name": "Michael Plakhov",
+        "email": "qotsaman@gmail.com"
+    },
+    "license": "MIT"
+}

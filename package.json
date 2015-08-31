@@ -1,14 +1,20 @@
 {
-    "name": "strict-agent",
-    "version": "1.0.0",
-    "description": "HTTP Agent with strict queue requests limit",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-        },
-    "author": {
-        "name": "Michael Plakhov",
-        "email": "qotsaman@gmail.com"
-    },
-    "license": "MIT"
+  "name": "strict-agent",
+  "version": "1.0.0",
+  "description": "HTTP Agent with strict queue requests limit",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "lint": "jshint **.js"
+  },
+  "author": {
+    "name": "Michael Plakhov",
+    "email": "qotsaman@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "mocha": "^2.3.0",
+    "node-mocks-http": "^1.4.3",
+    "jshint": "2.6.x"
+  }
 }

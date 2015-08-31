@@ -1,11 +1,12 @@
 var http = require('http'),
-        util = require('util');
+    util = require('util'),
+    debug = util.debuglog('http');
 
 function strictAgent(options){
     var self = this;
     http.Agent.call(this, options);
     self.queueLimit = options.queueLimit || 10000000;
-};
+}
 
 util.inherits(strictAgent, http.Agent);
 
@@ -51,7 +52,7 @@ strictAgent.prototype.addRequest = function(req, options) {
             this.requests[name].push(req);
         } else {
             process.nextTick(function(){
-                req.emit('error', new Error('Requests queue is reached its limit, request rejected.'))
+                req.emit('error', new Error('Requests queue is reached its limit, request rejected.'));
             });
         }
     }

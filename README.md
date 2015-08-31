@@ -1,5 +1,6 @@
 
 [![Build Status][travis-badge]][travis-url]
+[![NPM Version][npm-image]][npm-url]
 
 # strict-http-agent
 Node.js HTTP Agent with strict queued requests limit
@@ -34,3 +35,5 @@ Specifies max number of requests in queue
 
 [travis-badge]: https://travis-ci.org/michae1/strict-http-agent.svg
 [travis-url]: https://travis-ci.org/michae1/strict-http-agent
+[npm-image]: https://img.shields.io/npm/v/strict-agent.svg
+[npm-url]: https://npmjs.com/package/strict-agent

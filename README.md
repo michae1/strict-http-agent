@@ -30,5 +30,5 @@ var req = http.get(options, function(res) {
 ### queueLimit
 Specifies max number of requests in queue
 
-[travis-badge]: https://travis-ci.org/howardabrams/node-mocks-http.svg?branch=master
-[travis-url]: https://travis-ci.org/howardabrams/node-mocks-http
+[travis-badge]: https://travis-ci.org/michae1/strict-http-agent.svg
+[travis-url]: https://travis-ci.org/michae1/strict-http-agent

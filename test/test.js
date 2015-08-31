@@ -1,8 +1,7 @@
 var assert = require("assert"),
     strictAgent = require("../index"),
     PassThrough = require('stream').PassThrough,
-    httpMocks = require('node-mocks-http'),
-    Promise = require("bluebird");
+    httpMocks = require('node-mocks-http');
 
 routeHandler = function( request, response ) { 
     // posible additional conversions

@@ -6,6 +6,8 @@ Node.js HTTP Agent with strict queued requests limit
 
 Main goal is to prevent situation when responses is slow and new requests coming into unlimited queue (javascript array).
 
+Requires Node.js>0.10 or io.js
+
 ## Usage
 ### HTTP get example:
 ```

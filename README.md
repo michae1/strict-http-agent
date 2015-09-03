@@ -19,7 +19,7 @@ var myAgent = new strictAgent({ maxSockets: 10, queueLimit: 100000 });
 var options = {
 	host: 'localhost',
 	port: 8000,
-	path: '/' + i,
+	path: '/',
 	agent: myAgent
 };
 

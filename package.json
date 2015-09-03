@@ -1,11 +1,11 @@
 {
   "name": "strict-agent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "HTTP Agent with strict queue requests limit",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "lint": "jshint **.js"
+    "jshint": "jshint *.js"
   },
   "author": {
     "name": "Michael Plakhov",

@@ -11,7 +11,7 @@ Requires Node.js>0.10 or io.js
 
 ## Usage
 ### HTTP get example:
-```
+```javascript
 var strictAgent = require("strict-http-agent");
 ...
 var myAgent = new strictAgent({ maxSockets: 10, queueLimit: 100000 });

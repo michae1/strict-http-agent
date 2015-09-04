@@ -26,7 +26,7 @@
     "index.js"
   ],
   "engines": {
-    "node": ">= 0.11"
+    "node": ">= 0.10"
   },
   "dependencies": {
     "mocha": "^2.3.0",

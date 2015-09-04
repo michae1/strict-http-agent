@@ -5,7 +5,12 @@
 # strict-http-agent
 Node.js HTTP Agent with strict queued requests limit
 
-Main goal is to prevent situation when responses is slow and new requests coming into unlimited queue (javascript array).
+Main goal is to prevent this scenario:
+
+Node process sending requests to some slow service. By default after reaching maxSockets, new requests are coming into unlimited queue (javascript array).
+There are timeouts for requests which are in use, but not for those in queue.
+After time there will be huge queue in memory.
+This module prevents this situation by limiting queue size (fast way) and/or ttl for queues requests (slower).
 
 Requires Node.js>=0.10 or io.js
 

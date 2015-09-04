@@ -1,6 +1,6 @@
 {
   "name": "strict-agent",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "HTTP Agent with strict queue requests limit",
   "main": "index.js",
   "scripts": {

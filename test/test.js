@@ -82,7 +82,8 @@ describe('StrictAgent', function() {
                 agent.addRequest(request, { host: testHost, port: testPort })
             }
             setTimeout(function(){
-                assert.equal(agent.requests[agent.getName({ host: testHost, port: testPort })].length, 0);
+                var name = agent.getName({ host: testHost, port: testPort });
+                assert.equal(agent.requests[name].length, 0);
                 done();
             }, 20)
         });

@@ -32,9 +32,23 @@ strictAgent.prototype.getRequestStore = function(){
     }
 }
 
-
 if (process.version.match(/^v(\d+\.\d+)/)[1] == '0.10'){
+    // Node 0.10 integration and additional methods
+    strictAgent.prototype.getName = function(options) {
+        var name = options.host + ':' + options.port;
+            if (options.localAddress) {
+                name += ':' + options.localAddress;
+        }
+        return name;
+    }
     strictAgent.prototype.addRequest = function(req, host, port, localAddress) {
+        if (typeof(host) === 'object'){
+            // Compatibility with libs compatible only with 0.11+ 
+            var options = host;
+            host = options.host;
+            port = options.port;
+            localAddress = options.localAddress;
+        }
         var name = host + ':' + port;
         if (localAddress) {
             name += ':' + localAddress;

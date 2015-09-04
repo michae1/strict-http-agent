@@ -7,6 +7,8 @@ routeHandler = function( request, response ) {
     // posible additional conversions
 }
 
+    const testHost = 'localhost',
+        testPort = '9999';
 
 describe('StrictAgent', function() {
     describe('queue restriction', function () {
@@ -25,7 +27,6 @@ describe('StrictAgent', function() {
             routeHandler(request, response);
 
             // Mocking request methods:
-
             request.getHeader = function(x){
                 return null;
             }
@@ -48,8 +49,42 @@ describe('StrictAgent', function() {
                 }
             }
             for (var i=0; i<7; i++){
-                agent.addRequest(request, { host: 'localhost', port: '9999' })
+                agent.addRequest(request, { host: testHost, port: testPort })
             }
+        });
+        it('should drop new expired requests from queue', function (done) {
+            var agent = new strictAgent({ maxSockets: -1, queueLimit: 100, queueTTL: 10 }),
+                request  = httpMocks.createRequest({
+                    method: 'GET',
+                    url: '/',
+                }),
+                response = httpMocks.createResponse(),
+                expectedErrNum = 5,
+                raisedErrorNum = 0,
+                errorMessagesReceived = {};
+        
+
+            routeHandler(request, response);
+
+            // Mocking request methods:
+            request.getHeader = function(x){
+                return null;
+            }
+
+            request.onSocket = function(x){
+                return null;
+            }
+
+            request.emit = function(event, message){
+            }
+
+            for (var i=0; i<1; i++){
+                agent.addRequest(request, { host: testHost, port: testPort })
+            }
+            setTimeout(function(){
+                assert.equal(agent.requests[agent.getName({ host: testHost, port: testPort })].length, 0);
+                done();
+            }, 20)
         });
     });
 });

@@ -14,7 +14,7 @@ Requires Node.js>=0.10 or io.js
 ```javascript
 var strictAgent = require("strict-http-agent");
 ...
-var myAgent = new strictAgent({ maxSockets: 10, queueLimit: 100000 });
+var myAgent = new strictAgent({ maxSockets: 10, queueLimit: 100000, queueTTL: 1000 });
 
 var options = {
 	host: 'localhost',
@@ -32,6 +32,9 @@ var req = http.get(options, function(res) {
 
 ### queueLimit
 Specifies max number of requests in queue
+
+### queueTTL
+Specified max ttl for queued requests
 
 [travis-badge]: https://travis-ci.org/michae1/strict-http-agent.svg
 [travis-url]: https://travis-ci.org/michae1/strict-http-agent

@@ -41,7 +41,24 @@ Specifies max number of requests in queue
 ### queueTTL
 Specified max ttl for queued requests
 
+## Testing
+```
+npm test
+```
+
+## Load testing
+### Requirements:
+* [Vagrant] > 1.7.x
+* [Siege]
+
+### Running tests:
+* In load_tests folder run `vagrant up`. It will download VM, install all requirements.
+* In load_tests folder you can change siege testing params in run.sh and .siegerc after that just run `./run.sh`. Every test will run on reloaded VM.
+* After all tests results will be in run_log in csv format.
+
 [travis-badge]: https://travis-ci.org/michae1/strict-http-agent.svg
 [travis-url]: https://travis-ci.org/michae1/strict-http-agent
 [npm-image]: https://img.shields.io/npm/v/strict-agent.svg
 [npm-url]: https://npmjs.com/package/strict-agent
+[Vagrant]: https://www.vagrantup.com/downloads.html
+[Siege]: https://www.joedog.org/siege-home/

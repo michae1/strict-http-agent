@@ -33,9 +33,14 @@
     "node": ">= 0.10"
   },
   "dependencies": {
-    "simple-timed-queue":"1.0.x",
+    "simple-timed-queue": "1.0.x"
+  },
+  "devDependencies": {
+    "es6-promise": "^3.0.2",
+    "restler": "^3.4.0",
     "mocha": "^2.3.0",
     "node-mocks-http": "^1.4.3",
-    "jshint": "2.6.x"
+    "jshint": "2.6.x",
+    "restify": "^3.0.3"
   }
 }

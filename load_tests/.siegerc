@@ -1,0 +1,2 @@
+Logfile = ./run_log
+failures = 20000

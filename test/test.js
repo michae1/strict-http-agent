@@ -7,8 +7,8 @@ routeHandler = function( request, response ) {
     // posible additional conversions
 }
 
-    const testHost = 'localhost',
-        testPort = '9999';
+const testHost = 'localhost',
+    testPort = '9999';
 
 describe('StrictAgent', function() {
     describe('queue restriction', function () {

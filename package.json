@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
+    "cover": "istanbul cover  _mocha -- -R spec",
     "jshint": "jshint *.js"
   },
   "repository": {
@@ -37,10 +38,11 @@
   },
   "devDependencies": {
     "es6-promise": "^3.0.2",
-    "restler": "^3.4.0",
+    "istanbul": "^0.3.21",
+    "jshint": "2.6.x",
     "mocha": "^2.3.0",
     "node-mocks-http": "^1.4.3",
-    "jshint": "2.6.x",
-    "restify": "^3.0.3"
+    "restify": "^3.0.3",
+    "restler": "^3.4.0"
   }
 }

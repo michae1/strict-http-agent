@@ -52,7 +52,7 @@ describe('StrictAgent', function() {
                 agent.addRequest(request, { host: testHost, port: testPort })
             }
         });
-        it('should drop new expired requests from queue', function (done) {
+        it('should drop expired requests from queue', function (done) {
             var agent = new strictAgent({ maxSockets: -1, queueLimit: 100, queueTTL: 10 }),
                 request  = httpMocks.createRequest({
                     method: 'GET',

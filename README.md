@@ -53,8 +53,11 @@ npm test
 
 ### Running tests:
 * In load_tests folder run `vagrant up`. It will download VM, install all requirements.
-* In load_tests folder you can change siege testing params in run.sh and .siegerc after that just run `./run.sh`. Every test will run on reloaded VM.
+* In load_tests folder you can change siege testing params in run.sh and .siegerc after that just run `./run.sh`. Every test will run on reloaded VM. For lite run use run-lite.sh to not reload VM every time.
 * After all tests results will be in run_log in csv format.
+
+### Play around
+* In tools folder there are simple http server [catcher.js] and simple implementation of requests: [demo.js].
 
 [travis-badge]: https://travis-ci.org/michae1/strict-http-agent.svg
 [travis-url]: https://travis-ci.org/michae1/strict-http-agent
@@ -62,3 +65,6 @@ npm test
 [npm-url]: https://npmjs.com/package/strict-agent
 [Vagrant]: https://www.vagrantup.com/downloads.html
 [Siege]: https://www.joedog.org/siege-home/
+[catcher.js]: tools/catcher.js
+[demo.js]: tools/demo.js
+[restler]: https://github.com/danwrong/restler

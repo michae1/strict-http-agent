@@ -3,14 +3,83 @@ var http = require('http'),
     TimedQueue = require('simple-timed-queue'),
     debug = function noop() {};
     if (util.debuglog != null) {
-      debug = util.debuglog("http")
+      debug = util.debuglog("http");
     }
 
-function strictAgent(options){
+function strictAgent(options) {
     var self = this;
     http.Agent.call(this, options);
     self.queueLimit = options.queueLimit || 10000000;
     self.queueTTL = parseInt(options.queueTTL) || undefined;
+    // rewrite free event listener
+    self.removeAllListeners('free');
+
+    self.on('free', function(socket, options) {
+        var name = self.getName(options);
+        debug('agent.on(free)', name);
+
+        if (!socket.destroyed &&
+            self.requests[name] && self.requests[name].length) {
+          var queuedRequest = self.requests[name].shift(!!self.queueTTL);
+          if (queuedRequest instanceof Array){
+            var currentRequest = queuedRequest[0];
+            var requestTimeout = currentRequest.setTimeout(queuedRequest[1], function(){
+                currentRequest.emit('error', new Error('Request timeout while in socket stage.'));
+                currentRequest.abort();
+                currentRequest.end();
+            });
+            currentRequest.on('end', function () {
+                // clear timeout
+                clearTimeout( requestTimeout );
+            });
+            currentRequest.on('error', function () {
+                // clear timeout
+                clearTimeout( requestTimeout );
+            });
+            currentRequest.on('abort', function () {
+                // clear timeout
+                clearTimeout( requestTimeout );
+            });
+            currentRequest.onSocket(socket);
+          } else  
+            queuedRequest.onSocket(socket);
+          if (self.requests[name].length === 0) {
+            // don't leak
+            delete self.requests[name];
+          }
+        } else {
+          // If there are no pending requests, then put it in
+          // the freeSockets pool, but only if we're allowed to do so.
+          var req = socket._httpMessage;
+          if (req &&
+              req.shouldKeepAlive &&
+              !socket.destroyed &&
+              self.options.keepAlive) {
+            var freeSockets = self.freeSockets[name];
+            var freeLen = freeSockets ? freeSockets.length : 0;
+            var count = freeLen;
+            if (self.sockets[name])
+              count += self.sockets[name].length;
+
+            if (count >= self.maxSockets || freeLen >= self.maxFreeSockets) {
+              self.removeSocket(socket, options);
+              socket.destroy();
+            } else {
+              freeSockets = freeSockets || [];
+              self.freeSockets[name] = freeSockets;
+              socket.setKeepAlive(true, self.keepAliveMsecs);
+              socket.unref();
+              socket._httpMessage = null;
+              self.removeSocket(socket, options);
+              freeSockets.push(socket);
+            }
+          } else {
+            self.removeSocket(socket, options);
+            socket.destroy();
+          }
+        }
+      });
+    
 }
 
 function adoptedTimedQueue(ttl, delta){
@@ -26,7 +95,11 @@ util.inherits(strictAgent, http.Agent);
 
 strictAgent.prototype.getRequestStore = function(){
     if ('queueTTL' in this.options && this.options.queueTTL){
-        return new adoptedTimedQueue(this.options.queueTTL);
+        var store = new adoptedTimedQueue(this.options.queueTTL);
+        store.on('expired', function(req){
+            req.emit('error', new Error('Request timeout while in queue stage.'));
+        });
+        return store;
     } else {
         return new Array();
     }
